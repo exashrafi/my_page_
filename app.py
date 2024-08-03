@@ -19,13 +19,13 @@ def index():
 def welcome():
     name = request.cookies.get('name')
     if not name:
-        return redirect(url_for('welcome'))
+        return redirect(url_for('index'))  # Redirect to index if no name cookie is set
     return render_template('welcome.html', name=name)
 
 
 @app.route('/logout')
 def logout():
-    response = make_response(redirect(url_for('welcome')))
+    response = make_response(redirect(url_for('index')))  # Redirect to index after logout
     response.delete_cookie('name')
     response.delete_cookie('email')
     return response
